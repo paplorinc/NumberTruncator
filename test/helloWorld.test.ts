@@ -1,8 +1,8 @@
-import * as chai from 'chai';
-import app from '../src/App';
-import chaiHttp = require('chai-http');
+import * as chai from 'chai'
+import app from '../src/App'
 
-chai.use(chaiHttp);
+chai.use(require('chai-http'))
+
 describe('baseRoute', () => {
     it('should be json', () => chai.request(app).get('/')
         .then(r => chai.expect(r.type).to.eql('application/json'))
