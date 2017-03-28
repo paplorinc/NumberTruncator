@@ -74,15 +74,23 @@ class ScaleNames {
     }
 }
 
+let isValid = (num: string) => !isNaN(Number(num)) && isFinite(Number(num))
 let getScale = (num: string) => 1 + Math.floor(Math.log10(Math.abs(Number(num))))
+let truncateNumber = (num: number, decimalCount: number) => {
+    let pow10 = 10 ** decimalCount
+    return Math.trunc(pow10 * num) / pow10;
+}
 
 export let truncate = (num: string) => {
-    let numScale = getScale(num)
-    let truncatedScale = ScaleNames.getMap().lower_bound(numScale).prev().value
-    if (truncatedScale == null) return Number(num)
+    if (!isValid(num)) return num;
     else {
-        let decimal = Number(num) / 10 ** truncatedScale.first
-        let truncatedDecimal = Math.trunc(10 * decimal) / 10
-        return truncatedDecimal + truncatedScale.second
+        let numScale = getScale(num)
+        let truncatedScale = ScaleNames.getMap().lower_bound(numScale).prev().value
+        if (truncatedScale == null) return num
+        else {
+            let decimal = Number(num) / (10 ** truncatedScale.first)
+            let truncatedDecimal = truncateNumber(decimal, 1);
+            return truncatedDecimal + truncatedScale.second
+        }
     }
 }
