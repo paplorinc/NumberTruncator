@@ -7,7 +7,7 @@ export function init() {
 
     server.connection({
         host: 'localhost',
-        port: port,
+        port: port
     })
     server.route({
         method: 'GET',
