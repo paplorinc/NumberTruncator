@@ -5,9 +5,8 @@ import {truncate} from "../src/truncator";
 const server = require('../src/index').init()
 const assert = chai.assert
 
-describe('truncator specifications: should keep anything smaller than a million', () => {
-    it('via `get`', done =>
-        assertEquals(done, '532', '532'))
+describe('truncator specifications: should keep anything invalid or smaller than a million', () => {
+    it('via `get`', done => assertEquals(done, '532', '532'))
 
     it('via method call', done => {
         assert(truncate('0') == '0')
@@ -26,28 +25,32 @@ describe('truncator specifications: should keep anything smaller than a million'
 })
 
 describe('truncator specifications: should abbreviate millions', () => {
-    it('via `get`', done =>
-        assertEquals(done, '1000000', '1M'))
+    it('via `get`', done => assertEquals(done, '1000000', '1M'))
 
     it('via method call', done => {
         assert(truncate('1100000') == '1.1M')
         assert(truncate('1234567') == '1.2M')
         assert(truncate('1290000') == '1.2M')
         assert(truncate('1999999') == '1.9M')
-        assert(truncate('87654321') == '87.6M')
         assert(truncate('2500000.34') == '2.5M')
+        assert(truncate('87654321') == '87.6M')
         assert(truncate('-987654321') == '-987.6M')
         done()
     })
 })
 
 describe('truncator specifications: should abbreviate billions and greater', () => {
-    it('via `get`', done =>
-        assertEquals(done, '1123456789', '1.1B'))
+    it('via `get`', done => assertEquals(done, '1123456789', '1.1B'))
 
     it('via method call', done => {
-        assert(truncate('-1123456789.345678') == '-1.1B')
-        assert(truncate('1123456789345678') == '1.1Quadri')
+        assert(truncate('-1234567891.2345') == '-1.2B')
+        assert(truncate('1234567893123') == '1.2Tril')
+        assert(truncate('12345678931234') == '12.3Tril')
+        assert(truncate('123456789312345') == '123.4Tril')
+        assert(truncate('1234567893123456') == '1.2Quadri')
+        assert(truncate('12345678931234567') == '12.3Quadri')
+        assert(truncate('123456789312345678') == '123.4Quadri')
+        assert(truncate('1234567893123456789') == '1.2Quint')
         done()
     })
 })
