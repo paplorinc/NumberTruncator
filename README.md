@@ -8,10 +8,11 @@ Given numbers of different lengths, we want to abbreviate them to comprehensible
 * fire up the webserver — `npm start`
 * open the url of the form `http://localhost:8000/truncate/3141592653.589`
 * the abbreviated number should be returned, e.g. `3.1B`
+* additionally run the tests via `npm test`
 
 ---
 
 For more info check out:
 * [The server](/src/index.ts)
-* [The truncation logic](/src/truncator.ts)
+* [The truncation logic](/src/truncator.ts)np
 * [The specifications](/test/truncator.test.ts)
