@@ -79,7 +79,7 @@ describe('truncator specifications: should abbreviate billions and greater', () 
         assertEquals(done, '-1123456789.345678', '-1.1B'))
 })
 
-const assertEquals = function (done: () => any, input: string, expected: string) {
+const assertEquals = (done: () => any, input: string, expected: string) => {
     server.inject({method: 'GET', url: '/truncate/' + input}, (res: IServerInjectResponse) => {
         chai.assert.equal(res.result, expected)
         done()
