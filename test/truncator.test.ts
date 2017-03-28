@@ -4,6 +4,9 @@ import {IServerInjectResponse} from "hapi"
 const server = require('../src/index').init()
 
 describe('truncator specifications: should keep anything smaller than a million', () => {
+    it('0', done =>
+        assertEquals(done, '0', '0'))
+
     it('3.14', done =>
         assertEquals(done, '3.14', '3.14'))
     it('3.141592653589793', done =>
@@ -48,9 +51,6 @@ describe('truncator specifications: should abbreviate millions', () => {
 })
 
 describe('truncator specifications: should abbreviate billions and greater', () => {
-    it('1123456789', done =>
-        assertEquals(done, '1123456789', '1.1B'))
-
     it('1123456789', done =>
         assertEquals(done, '1123456789', '1.1B'))
 
