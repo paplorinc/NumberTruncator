@@ -85,14 +85,3 @@ const assertEquals = function (done: () => any, input: string, expected: string)
         done()
     })
 }
-
-// negative numbers
-// smaller than million
-// should it work for scientific notation?
-// same abbreviation for Quadrillion, Quintillion (i.e. Long.MAX_VALUE (9223372036854775807L) is nine Quintillion, but 9.2Q could also mean Quadrillion)
-// * abbreviate to shortest prefix
-// * upper-camel case abbreviation?
-// Double.MAX_VALUE (1.7 * 10^308) is greater than 1 Centillion, should it be displayed as e.g. 1100C?
-// what should happen for gaps, e.g. 10^123 = 'Quadragintillion', 10^153 = 'Quinquagintillion'
-// should 900M be 0.9B instead?
-// should I avoid numeric roundings for e.g. double??
