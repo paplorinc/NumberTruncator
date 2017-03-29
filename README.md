@@ -14,5 +14,5 @@ Given numbers of different lengths, we want to abbreviate them to comprehensible
 
 For more info check out:
 * [The server](/src/index.ts)
-* [The truncation logic](/src/truncator.ts)np
+* [The truncation logic](/src/truncator.ts)
 * [The specifications](/test/truncator.test.ts)
