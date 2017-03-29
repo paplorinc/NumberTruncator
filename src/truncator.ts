@@ -1,5 +1,6 @@
 import std = require("tstl")
 import {forall, foreach} from "./maputils";
+import {isValid, getScale, truncateNumber} from "./numberutils";
 
 class Suffixes {
     private static suffixes = new std.TreeMap<number, string>([
@@ -71,14 +72,6 @@ class Suffixes {
         forall(Suffixes.suffixes, (_, v) => (v != value && v.startsWith(prefix)))
 }
 
-let isValid = (num: string) => !isNaN(Number(num)) && isFinite(Number(num))
-
-let getScale = (num: string) => 1 + Math.trunc(Math.log10(Math.abs(Number(num))))
-
-let truncateNumber = (num: number, decimalCount: number) => {
-    let pow10 = 10 ** decimalCount
-    return Math.trunc(pow10 * num) / pow10
-}
 let format = (num: number, scale: number, suffix: string) => {
     let decimal = num / (10 ** scale)
     return truncateNumber(decimal, 1) + suffix
