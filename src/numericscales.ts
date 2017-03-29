@@ -1,6 +1,26 @@
 import std = require("tstl")
 import {forall, foreach} from "./maputils";
 
+export const getScaleSuffix = (scale: number) => get().lower_bound(scale).prev().value
+
+const get = () => {
+    if (notYetAbbreviated())
+        abbreviateMapValues();
+    return suffixes
+}
+
+const notYetAbbreviated = () => suffixes.begin().second.length > 1
+
+const abbreviateMapValues = () => foreach(suffixes, (k, v) => {
+    for (let i = 1; i < v.length; i++) {
+        const prefix = v.substr(0, i)
+        if (isUnique(v, prefix))
+            return suffixes.set(k, prefix)
+    }
+})
+const isUnique = (value: string, prefix: string) =>
+    forall(suffixes, (_, v) => (v != value && v.startsWith(prefix)))
+
 const suffixes = new std.TreeMap<number, string>([
     [6, 'Million'],
     [9, 'Billion'],
@@ -50,23 +70,3 @@ const suffixes = new std.TreeMap<number, string>([
     [303, 'Centillion'],
     [306, 'Uncentillion']
 ])
-
-const notYetAbbreviated = () => suffixes.begin().second.length > 1
-
-const abbreviateMapValues = () => foreach(suffixes, (k, v) => {
-    for (let i = 1; i < v.length; i++) {
-        const prefix = v.substr(0, i)
-        if (isUnique(v, prefix))
-            return suffixes.set(k, prefix)
-    }
-})
-const isUnique = (value: string, prefix: string) =>
-    forall(suffixes, (_, v) => (v != value && v.startsWith(prefix)))
-
-const get = () => {
-    if (notYetAbbreviated())
-        abbreviateMapValues();
-    return suffixes
-}
-
-export const getScaleSuffix = (scale: number) => get().lower_bound(scale).prev().value
