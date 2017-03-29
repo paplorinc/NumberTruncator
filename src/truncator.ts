@@ -1,7 +1,7 @@
 import std = require("tstl")
 
-class ScaleNames {
-    private static map = new std.TreeMap<number, string>([
+class Suffixes {
+    private static suffixes = new std.TreeMap<number, string>([
         [6, 'Million'],
         [9, 'Billion'],
         [12, 'Trillion'],
@@ -51,26 +51,30 @@ class ScaleNames {
         [306, 'Uncentillion']
     ])
 
-    public static getMap() {
-        let notYetTruncated = () => ScaleNames.map.begin().second.length > 1
-        if (notYetTruncated()) {
-            let isUnique = (value: string, prefix: string) => {
-                for (let it = ScaleNames.map.begin(); it != ScaleNames.map.end(); it = it.next())
-                    if (it.second != value && it.second.startsWith(prefix))
-                        return false
-                return true
-            }
+    public static get() {
+        if (this.notYetTruncated())
+            this.truncateMapValues();
+        return Suffixes.suffixes
+    }
 
-            for (let it = ScaleNames.map.begin(); it != ScaleNames.map.end(); it = it.next())
-                for (let i = 1; i < it.second.length; i++) {
-                    let prefix = it.second.substr(0, i)
-                    if (isUnique(it.second, prefix)) {
-                        ScaleNames.map.set(it.first, prefix)
-                        break
-                    }
+    private static notYetTruncated = () => Suffixes.suffixes.begin().second.length > 1
+
+    private static isUnique = (value: string, prefix: string) => {
+        for (let it = Suffixes.suffixes.begin(); it != Suffixes.suffixes.end(); it = it.next())
+            if (it.second != value && it.second.startsWith(prefix))
+                return false
+        return true
+    }
+
+    private static truncateMapValues = () => {
+        for (let it = Suffixes.suffixes.begin(); it != Suffixes.suffixes.end(); it = it.next())
+            for (let i = 1; i < it.second.length; i++) {
+                let prefix = it.second.substr(0, i)
+                if (Suffixes.isUnique(it.second, prefix)) {
+                    Suffixes.suffixes.set(it.first, prefix)
+                    break
                 }
-        }
-        return ScaleNames.map
+            }
     }
 }
 
@@ -87,7 +91,7 @@ let format = (num: number, scale: number, suffix: string) => {
     return truncateNumber(decimal, 1) + suffix
 }
 
-let getScaleName = (scale: number) => ScaleNames.getMap().lower_bound(scale).prev().value
+let getScaleName = (scale: number) => Suffixes.get().lower_bound(scale).prev().value
 
 export let truncate = (num: string) => {
     if (!isValid(num)) return num
