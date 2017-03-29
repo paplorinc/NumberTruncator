@@ -63,7 +63,7 @@ class Suffixes {
 
     private static truncateMapValues = () => foreach(Suffixes.suffixes, (k, v) => {
         for (let i = 1; i < v.length; i++) {
-            let prefix = v.substr(0, i)
+            const prefix = v.substr(0, i)
             if (Suffixes.isUnique(v, prefix))
                 return Suffixes.suffixes.set(k, prefix)
         }
@@ -72,17 +72,17 @@ class Suffixes {
         forall(Suffixes.suffixes, (_, v) => (v != value && v.startsWith(prefix)))
 }
 
-let format = (num: number, scale: number, suffix: string) => {
-    let decimal = num / pow10(scale)
+const format = (num: number, scale: number, suffix: string) => {
+    const decimal = num / pow10(scale)
     return truncateNumber(decimal, 1) + suffix
 }
 
-let getScaleSuffix = (scale: number) => Suffixes.get().lower_bound(scale).prev().value
+const getScaleSuffix = (scale: number) => Suffixes.get().lower_bound(scale).prev().value
 
-export let truncate = (num: string) => {
+export const truncate = (num: string) => {
     if (!isValid(num)) return num
     else {
-        let scaleAndSuffix = getScaleSuffix(getScale(num))
+        const scaleAndSuffix = getScaleSuffix(getScale(num))
         if (scaleAndSuffix == null) return num
         else return format(Number(num), scaleAndSuffix.first, scaleAndSuffix.second)
     }
