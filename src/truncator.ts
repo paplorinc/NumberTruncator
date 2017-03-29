@@ -63,10 +63,8 @@ class Suffixes {
     private static truncateMapValues = () => foreach(Suffixes.suffixes, (k, v) => {
         for (let i = 1; i < v.length; i++) {
             let prefix = v.substr(0, i)
-            if (Suffixes.isUnique(v, prefix)) {
-                Suffixes.suffixes.set(k, prefix)
-                break
-            }
+            if (Suffixes.isUnique(v, prefix))
+                return Suffixes.suffixes.set(k, prefix)
         }
     })
     private static isUnique = (value: string, prefix: string) =>
