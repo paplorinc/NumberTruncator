@@ -1,8 +1,8 @@
 import * as chai from "chai"
 import {IServerInjectResponse} from "hapi"
 import {truncate} from "../src/truncator";
+import server from "../src/index";
 
-const server = require('../src/index').init()
 const assert = chai.assert
 
 describe('truncator specifications: should keep anything invalid or smaller than a million', () => {
