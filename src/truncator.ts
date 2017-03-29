@@ -1,6 +1,6 @@
 import std = require("tstl")
 import {forall, foreach} from "./maputils";
-import {isValid, getScale, truncateNumber} from "./numberutils";
+import {isValid, getScale, truncateNumber, pow10} from "./numberutils";
 
 class Suffixes {
     private static suffixes = new std.TreeMap<number, string>([
@@ -73,7 +73,7 @@ class Suffixes {
 }
 
 let format = (num: number, scale: number, suffix: string) => {
-    let decimal = num / (10 ** scale)
+    let decimal = num / pow10(scale)
     return truncateNumber(decimal, 1) + suffix
 }
 
