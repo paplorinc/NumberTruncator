@@ -1,4 +1,5 @@
 import std = require("tstl")
+import {forall, foreach} from "./maputils";
 
 class Suffixes {
     private static suffixes = new std.TreeMap<number, string>([
@@ -59,23 +60,17 @@ class Suffixes {
 
     private static notYetTruncated = () => Suffixes.suffixes.begin().second.length > 1
 
-    private static isUnique = (value: string, prefix: string) => {
-        for (let it = Suffixes.suffixes.begin(); it != Suffixes.suffixes.end(); it = it.next())
-            if (it.second != value && it.second.startsWith(prefix))
-                return false
-        return true
-    }
-
-    private static truncateMapValues = () => {
-        for (let it = Suffixes.suffixes.begin(); it != Suffixes.suffixes.end(); it = it.next())
-            for (let i = 1; i < it.second.length; i++) {
-                let prefix = it.second.substr(0, i)
-                if (Suffixes.isUnique(it.second, prefix)) {
-                    Suffixes.suffixes.set(it.first, prefix)
-                    break
-                }
+    private static truncateMapValues = () => foreach(Suffixes.suffixes, (k, v) => {
+        for (let i = 1; i < v.length; i++) {
+            let prefix = v.substr(0, i)
+            if (Suffixes.isUnique(v, prefix)) {
+                Suffixes.suffixes.set(k, prefix)
+                break
             }
-    }
+        }
+    })
+    private static isUnique = (value: string, prefix: string) =>
+        forall(Suffixes.suffixes, (_, v) => (v != value && v.startsWith(prefix)))
 }
 
 let isValid = (num: string) => !isNaN(Number(num)) && isFinite(Number(num))
