@@ -84,13 +84,13 @@ let format = (num: number, scale: number, suffix: string) => {
     return truncateNumber(decimal, 1) + suffix
 }
 
-let getScaleName = (scale: number) => Suffixes.get().lower_bound(scale).prev().value
+let getScaleSuffix = (scale: number) => Suffixes.get().lower_bound(scale).prev().value
 
 export let truncate = (num: string) => {
     if (!isValid(num)) return num
     else {
-        let scaleAndName = getScaleName(getScale(num))
-        if (scaleAndName == null) return num
-        else return format(Number(num), scaleAndName.first, scaleAndName.second)
+        let scaleAndSuffix = getScaleSuffix(getScale(num))
+        if (scaleAndSuffix == null) return num
+        else return format(Number(num), scaleAndSuffix.first, scaleAndSuffix.second)
     }
 }
