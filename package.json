@@ -12,7 +12,6 @@
     "debug": "^2.6.3",
     "express": "^4.15.2",
     "hapi": "^16.1.0",
-    "tstl": "^1.4.3",
     "typescript": "^2.3.0-dev.20170327"
   },
   "devDependencies": {

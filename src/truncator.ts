@@ -1,4 +1,3 @@
-import std = require("tstl")
 import {getScale, isValid, pow10, truncateNumber} from "./numberutils";
 import {getScaleSuffix} from "./numericscales";
 
@@ -7,7 +6,7 @@ export const truncate = (num: string) => {
     else {
         const scaleAndSuffix = getScaleSuffix(getScale(num))
         if (scaleAndSuffix == null) return num
-        else return format(Number(num), scaleAndSuffix.first, scaleAndSuffix.second)
+        else return format(Number(num), scaleAndSuffix[0], scaleAndSuffix[1])
     }
 }
 

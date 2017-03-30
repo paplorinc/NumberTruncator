@@ -1,17 +1,14 @@
-import std = require("tstl")
-import {forall, foreach} from "./maputils";
+export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find((e, _) => e[0] < scale)
 
-export const getScaleSuffix = (scale: number) => get().lower_bound(scale).prev().value
-
-const get = () => {
+const getAbbreviatedSuffixes = () => {
     if (notYetAbbreviated())
         abbreviateMapValues();
-    return suffixes
+    return Array.from(suffixes.entries()).reverse()
 }
 
-const notYetAbbreviated = () => suffixes.begin().second.length > 1
+const notYetAbbreviated = () => suffixes.get(6) != 'M'
 
-const abbreviateMapValues = () => foreach(suffixes, (k, v) => {
+const abbreviateMapValues = () => suffixes.forEach((v, k) => {
     for (let i = 1; i < v.length; i++) {
         const prefix = v.substr(0, i)
         if (isUnique(v, prefix))
@@ -19,9 +16,9 @@ const abbreviateMapValues = () => foreach(suffixes, (k, v) => {
     }
 })
 const isUnique = (value: string, prefix: string) =>
-    forall(suffixes, (_, v) => (v != value && v.startsWith(prefix)))
+    Array.from(suffixes.values()).every(v => (v == value || !v.startsWith(prefix)))
 
-const suffixes = new std.TreeMap<number, string>([
+const suffixes = new Map<number, string>([
     [6, 'Million'],
     [9, 'Billion'],
     [12, 'Trillion'],
