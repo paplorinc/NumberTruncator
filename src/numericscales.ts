@@ -1,4 +1,4 @@
-export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find((e, _) => e[0] < scale)
+export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find(([k, _], __) => k < scale)
 
 const getAbbreviatedSuffixes = () => {
     if (notYetAbbreviated())
