@@ -2,7 +2,7 @@ export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find((
 
 const getAbbreviatedSuffixes = () => {
     if (notYetAbbreviated())
-        abbreviateMapValues();
+        abbreviateMapValues()
     return Array.from(suffixes.entries()).reverse()
 }
 

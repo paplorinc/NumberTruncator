@@ -1,5 +1,5 @@
-import {getScale, isValid, pow10, truncateNumber} from "./numberutils";
-import {getScaleSuffix} from "./numericscales";
+import {getScale, isValid, pow10, truncateNumber} from './numberutils'
+import {getScaleSuffix} from './numericscales'
 
 export const truncate = (num: string) => {
     if (!isValid(num)) return num

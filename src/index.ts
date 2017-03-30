@@ -1,5 +1,5 @@
 import * as Hapi from 'hapi'
-import {truncate} from "./truncator"
+import {truncate} from './truncator'
 
 const port = process.env.port || 8000
 const server = new Hapi.Server()
