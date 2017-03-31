@@ -1,7 +1,7 @@
-import * as chai from "chai";
-import {IServerInjectResponse} from "hapi";
-import {truncate} from "../src/truncator";
-import server from "../src/index";
+import * as chai from 'chai';
+import {IServerInjectResponse} from 'hapi';
+import {truncate} from '../src/truncator';
+import server from '../src/index';
 
 const expect = chai.expect
 
@@ -52,7 +52,7 @@ describe('truncator specifications: should abbreviate billions and greater', () 
 })
 
 const expectEq = (done: () => any, input: string, expected: string) => {
-    server.inject({method: 'GET', url: '/truncate/' + input}, (res: IServerInjectResponse) => {
+    server.inject({method: 'GET', url: `/truncate/${input}`}, (res: IServerInjectResponse) => {
         expect(res.result).eq(expected)
         done()
     })
