@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'"
+    "test": "mocha --reporter spec --compilers ts:ts-node/register \"test/**/*.test.ts\""
   },
   "dependencies": {
     "debug": "^2.6.3",
