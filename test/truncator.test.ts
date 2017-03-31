@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 import {IServerInjectResponse} from 'hapi';
 import {truncate} from '../src/truncator';
-import server from '../src/index';
+import {server} from '../src/index';
 
 const expect = chai.expect
 
