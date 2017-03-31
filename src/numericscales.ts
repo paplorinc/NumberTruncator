@@ -11,8 +11,10 @@ const notYetAbbreviated = () => suffixes.get(6) != 'M'
 const abbreviateMapValues = () => suffixes.forEach((v, k) => {
     for (let i = 1; i < v.length; i++) {
         const prefix = v.substr(0, i)
-        if (isUnique(v, prefix))
-            return suffixes.set(k, prefix)
+        if (isUnique(v, prefix)) {
+            suffixes.set(k, prefix)
+            break
+        }
     }
 })
 const isUnique = (value: string, prefix: string) =>
