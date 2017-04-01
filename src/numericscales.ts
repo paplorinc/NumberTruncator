@@ -1,12 +1,12 @@
-export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find(([k, _], __) => k < scale)
+export const getScaleSuffix = (scale: number) => getAbbreviatedSuffixes().find(([k, _]) => k < scale)
 
 const getAbbreviatedSuffixes = () => {
     if (notYetAbbreviated())
         abbreviateMapValues()
-    return Array.from(suffixes.entries()).reverse()
+    return Array.from(suffixes).reverse()
 }
 
-const notYetAbbreviated = () => suffixes.get(6) != 'M'
+const notYetAbbreviated = () => suffixes[6] != 'M'
 
 const abbreviateMapValues = () => suffixes.forEach((v, k) => {
     for (let i = 1; i < v.length; i++) {
@@ -18,7 +18,7 @@ const abbreviateMapValues = () => suffixes.forEach((v, k) => {
     }
 })
 const isUnique = (value: string, prefix: string) =>
-    Array.from(suffixes.values()).every(v => (v == value || !v.startsWith(prefix)))
+    Array.from(suffixes).every(([_, v]) => (v == value || !v.startsWith(prefix)))
 
 const suffixes = new Map<number, string>([
     [6, 'Million'],
