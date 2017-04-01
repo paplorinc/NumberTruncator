@@ -6,11 +6,11 @@ export const truncate = (num: string) => {
     else {
         const scaleAndSuffix = getScaleSuffix(getScale(num))
         if (scaleAndSuffix == null) return num
-        else return format(Number(num), scaleAndSuffix[0], scaleAndSuffix[1])
+        else return format(Number(num), scaleAndSuffix)
     }
 }
 
-const format = (num: number, scale: number, suffix: string) => {
+const format = (num: number, [scale, suffix]: [number, string]) => {
     const decimal = num / pow10(scale)
     return truncateNumber(decimal, 1) + suffix
 }
