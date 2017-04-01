@@ -5,7 +5,8 @@
     "outDir": "dist",
     "declaration": true,
     "alwaysStrict": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "sourceMap": true
   },
   "include": [
     "src/*.ts"
