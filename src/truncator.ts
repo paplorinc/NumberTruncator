@@ -5,8 +5,8 @@ export const truncate = (num: string) => {
     if (!isValid(num)) return num
     else {
         const scaleAndSuffix = getScaleSuffix(getScale(num))
-        if (scaleAndSuffix == null) return num
-        else return format(Number(num), scaleAndSuffix)
+        if (scaleAndSuffix) return format(Number(num), scaleAndSuffix)
+        else return num
     }
 }
 
