@@ -1,12 +1,8 @@
 {
     "rules": {
         "class-name": true,
-        "comment-format": [true,
-            "check-space"
-        ],
-        "indent": [true,
-            "spaces"
-        ],
+        "comment-format": [true, "check-space"],
+        "indent": [true, "spaces"],
         "one-line": [true,
             "check-open-brace",
             "check-whitespace"

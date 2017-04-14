@@ -1,7 +1,7 @@
-import * as chai from 'chai';
-import {IServerInjectResponse} from 'hapi';
-import {truncate} from '../src/truncator';
-import {server} from '../src/index';
+import * as chai from 'chai'
+import {IServerInjectResponse} from 'hapi'
+import {truncate} from '../src/truncator'
+import {server} from '../src/index'
 
 const expect = chai.expect
 
@@ -9,7 +9,7 @@ describe('truncator specifications: should keep anything invalid or smaller than
     it('via `get`', done => expectEq(done, '532', '532'))
 
     it('via method call', async () => {
-        expect(await truncate('0')).eq('0');
+        expect(await truncate('0')).eq('0')
         expect(await truncate('3.14')).eq('3.14')
         expect(await truncate('3.141592653589793')).eq('3.141592653589793')
         expect(await truncate('-123456.789')).eq('-123456.789')
